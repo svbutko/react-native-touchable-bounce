@@ -12,7 +12,7 @@ var React = require('react');
 var PropTypes = require('prop-types');
 var ReactNative = require('react-native');
 var createReactClass = require('create-react-class');
-var { Animated, Touchable } = ReactNative;
+var { Animated, Touchable, StyleSheet } = ReactNative;
 
 var EdgeInsetsPropType = PropTypes.shape({
     top: PropTypes.number,
@@ -132,7 +132,7 @@ var TouchableBounce = createReactClass({
     render: function (): ReactElement {
         return (
             <Animated.View
-                style={[{ transform: [{ scale: this.state.scale }] }, this.props.style]}
+                style={StyleSheet.flatten([{ transform: [{ scale: this.state.scale }] }, this.props.style])}
                 accessible={true}
                 accessibilityLabel={this.props.accessibilityLabel}
                 accessibilityComponentType={this.props.accessibilityComponentType}
@@ -144,7 +144,8 @@ var TouchableBounce = createReactClass({
                 onResponderGrant={this.touchableHandleResponderGrant}
                 onResponderMove={this.touchableHandleResponderMove}
                 onResponderRelease={this.touchableHandleResponderRelease}
-                onResponderTerminate={this.touchableHandleResponderTerminate}>
+                onResponderTerminate={this.touchableHandleResponderTerminate}
+            >
                 {this.props.children}
             </Animated.View>
         );
